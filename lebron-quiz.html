@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guess LeBron's Stat</title>
+  <style>
+body {
+  background-color: #1d1d1d;
+  color: white;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  padding: 30px;
+  margin: 0;
+}
+
+h1 {
+  color: #ffcc00;
+  font-size: 2.5em;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 40px;
+}
+
+.question {
+  font-size: 1.5em;
+  margin: 20px 0;
+  font-weight: bold;
+}
+
+.options {
+  margin-top: 30px;
+}
+
+.options button {
+  background-color: #552583;
+  color: #fff;
+  padding: 15px 25px;
+  margin: 10px;
+  border: none;
+  font-size: 1.2em;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  width: 250px;
+}
+
+.options button:hover {
+  background-color: #6a3f9c;
+  transform: scale(1.1);
+}
+
+.options button:active {
+  transform: scale(0.95);
+}
+
+#result {
+  margin-top: 20px;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+#result.positive {
+  color: #28a745;
+}
+
+#result.negative {
+  color: #dc3545;
+}
+
+footer {
+  margin-top: 50px;
+  color: #aaa;
+  font-size: 0.9em;
+}
+
+footer a {
+  color: #ffcc00;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+button {
+  background-color: #ffcc00;
+  color: #1d1d1d;
+  font-size: 1.2em;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 30px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #ffa500;
+}
+
+  </style>
+</head>
+<body>
+
+  <h1>🏀 Guess LeBron's Stat!</h1>
+  <p class="question" id="question">Loading question...</p>
+  <div class="options" id="options"></div>
+  <p id="result"></p>
+
+  <button onclick="newQuestion()">Next Question</button>
+
+  <footer>
+    <p><a href="<final.html>.html" style="color: #ffcc00;">← Back to Main Page</a></p>
+  </footer>
+
+  <script>
+    const questions = [
+      {
+        q: "How many NBA championships has LeBron James won?",
+        options: ["2", "4", "6"],
+        answer: "4"
+      },
+      {
+        q: "How many MVP awards has LeBron James received?",
+        options: ["3", "4", "5"],
+        answer: "4"
+      },
+      {
+        q: "What is LeBron James' career points per game average (approx)?",
+        options: ["27", "22", "30"],
+        answer: "27"
+      },
+      {
+        q: "What number jersey did LeBron wear in Miami?",
+        options: ["6", "23", "7"],
+        answer: "6"
+      },
+      {
+        q: "How many Olympic gold medals does LeBron have?",
+        options: ["1", "2", "3"],
+        answer: "2"
+      },
+      { q: "Is Lebron James the GOAT?",
+        options: ["Yes", "No"],
+        answer: "Yes"}
+    
+    ];
+
+    function newQuestion() {
+      const qIndex = Math.floor(Math.random() * questions.length);
+      const question = questions[qIndex];
+      document.getElementById("question").textContent = question.q;
+
+      const optionsDiv = document.getElementById("options");
+      optionsDiv.innerHTML = "";
+
+      question.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option;
+        btn.onclick = () => {
+          if (option === question.answer) {
+            document.getElementById("result").textContent = "✅ Correct!";
+          } else {
+            document.getElementById("result").textContent = `❌ Nope! The correct answer is ${question.answer}.`;
+          }
+        };
+        optionsDiv.appendChild(btn);
+      });
+
+      document.getElementById("result").textContent = "";
+    }
+
+ 
+    newQuestion();
+  </script>
+
+</body>
+</html>
